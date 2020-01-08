@@ -8,6 +8,6 @@ Hi! I am a Computer Science Master student at the Vrije Universiteit in Amsterda
 
 ## Contacts
 
-[Twitter](https://twitter.com/hammertux)
-[LinkedIn](https://www.linkedin.com/in/andrea-di-dio-17b468131/)
-[e-mail](a.didio@student.vu.nl)
+* [Twitter](https://twitter.com/hammertux)
+* [LinkedIn](https://www.linkedin.com/in/andrea-di-dio-17b468131/)
+* [e-mail](mailto:a.didio@student.vu.nl)
