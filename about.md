@@ -3,7 +3,7 @@ layout: page
 title: About Me
 ---
 ## About Me
-
+![Me](/img/me.JPG "Hey There :)")
 Hi! I am a Computer Science Master student at the Vrije Universiteit in Amsterdam. I am currently following the Computer Systems Security track run by [VUSec](https://www.vusec.net/). I am mainly interested in low level topics. Some keywords related to my interests include memory safety, Linux kernel, side channels, fault injection and compilers.
 
 ## Contacts
