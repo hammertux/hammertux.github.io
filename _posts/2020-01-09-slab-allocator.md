@@ -38,14 +38,15 @@ Note that the buddy allocator (and the slab allocator) allocate physically conti
 
 Page frames are allocated and free'd in the kernel using the following procedures:
 ```c
-
-static inline struct page *alloc_pages(gfp_t gfp_mask, unsigned int order); // "linux/gfp.h"
+// "linux/gfp.h"
+static inline struct page *alloc_pages(gfp_t gfp_mask, unsigned int order);
 
 /*
  * e.g., to request one page: struct page *page = alloc_pages(GFP_KERNEL, 0);
  */
 
-void free_pages(unsigned long addr, unsigned int order); // "linux/page_alloc.c"
+// "linux/page_alloc.c"
+void free_pages(unsigned long addr, unsigned int order);
 
 
 ```
@@ -86,7 +87,8 @@ This separation can be seen in the dedicated file for slab in the proc file syst
 ```bash
 sudo cat /proc/slabinfo #I will only show partial output for brevity
 
-# name <active_objs> <num_objs> <objsize> <objperslab> <pagesperslab> : tunables <limit> <batchcount> <sharedfactor> : slabdata <active_slabs> <num_slabs> <sharedavail>
+# name <active_objs> <num_objs> <objsize> <objperslab> <pagesperslab> : tunables <limit> <batchcount> <sharedfactor>
+# : slabdata <active_slabs> <num_slabs> <sharedavail>
 
 
 vm_area_struct     65543  66082    208   19    1 : tunables    0    0    0 : slabdata   3478   3478      0
@@ -118,13 +120,17 @@ The first few lines show dedicated caches, from `dma-kmalloc-256` onwards the ge
 
 ```c
 // "include/linux/slab.h"
-static __always_inline void *kmalloc(size_t size, gfp_t flags); //allocates memory through slab allocator.
+static __always_inline void *kmalloc(size_t size, gfp_t flags);
+//allocates memory through slab allocator.
 
-static inline void *kzalloc(size_t size, gfp_t flags); //allocates memory (and sets it to zero like calloc() in userspace) through the slab allocator.
+static inline void *kzalloc(size_t size, gfp_t flags);
+//allocates memory (and sets it to zero like calloc() in userspace) through the slab allocator.
 
-void * __must_check krealloc(const void *, size_t, gfp_t); //resize existing allocation.
+void * __must_check krealloc(const void *, size_t, gfp_t);
+//resize existing allocation.
 
-void kfree(const void *); //frees memory previously allocated.
+void kfree(const void *);
+//frees memory previously allocated.
 
 void kzfree(const void *);
 
@@ -142,17 +148,25 @@ static struct kmem_cache *vm_area_cachep;
 
 vm_area_cachep = KMEM_CACHE(vm_area_struct, SLAB_PANIC|SLAB_ACCOUNT);
 /*
- KMEM_CACHE() is a macro defined in "/include/linux/slab.h" which actually expands to a call to kmem_cache_create() which is the procedure to register a new slab cache and adds the new cache to the list of all slabs in the system.
+ KMEM_CACHE() is a macro defined in "/include/linux/slab.h" which actually expands to a call to
+ kmem_cache_create() which is the procedure to register a new slab cache and adds the new cache
+ to the list of all slabs in the system.
  */
 
 struct vm_area_struct *vma = kmem_cache_alloc(vm_area_cachep, GFP_KERNEL);
 /*
- kmem_cache_alloc() is the procedure to allocate the object from the dedicated cache memory. The allocation will be attempted first on a partially filled slab, then (if no partially filled slabs are available) in a free slab, and if no free slabs are found, it will try to allocate new page frames from the underlying buddy allocator.
+ kmem_cache_alloc() is the procedure to allocate the object from the dedicated cache memory.
+ The allocation will be attempted first on a partially filled slab,
+ then (if no partially filled slabs are available) in a free slab, and if no free slabs are found,
+ it will try to allocate new page frames from the underlying buddy allocator.
  */
 
  kmem_cache_free(vm_area_cachep, vma);
  /*
-  kmem_cache_free() is the procedure that frees the memory allocated to the vma object previously allocated. The (now free'd) slab will be kept in order to be used for future allocations and the memory is not released immediately after this call. When all of the slabs have been free'd, kernel modules have to call kmem_cache_destroy() to release the pre allocated memory.
+  kmem_cache_free() is the procedure that frees the memory allocated to the vma object
+  previously allocated. The (now free'd) slab will be kept in order to be used for future allocations
+  and the memory is not released immediately after this call. When all of the slabs have been free'd,
+  kernel modules have to call kmem_cache_destroy() to release the pre allocated memory.
  */
 ```
 
