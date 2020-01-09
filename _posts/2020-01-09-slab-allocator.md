@@ -83,7 +83,9 @@ The slab allocator provides two main classes of caches:
 
 This separation can be seen in the dedicated file for slab in the proc file system:
 
-<div style="overflow-x: scroll;">
+<span style="overflow-x:scroll;">
+
+
 ```bash
 sudo cat /proc/slabinfo #I will only show partial output for brevity
 
@@ -112,7 +114,9 @@ kmalloc-16         18432  18432     16  256    1 : tunables    0    0    0 : sla
 kmalloc-8          10149  10240      8  512    1 : tunables    0    0    0 : slabdata     20     20      0
 
 ```
-</div>
+
+</span>
+
 The first few lines show dedicated caches, from `dma-kmalloc-256` onwards the generic caches are listed.
 
 `kmalloc` is the interface the kernel provides to do generic allocations through the slab allocator:
