@@ -124,7 +124,7 @@ static __always_inline void *kmalloc(size_t size, gfp_t flags);
 //allocates memory through slab allocator.
 
 static inline void *kzalloc(size_t size, gfp_t flags);
-//allocates memory (and sets it to zero like calloc() in userspace) through the slab allocator.
+//allocates memory (and zeroes it out like calloc() in libc) through the slab allocator.
 
 void * __must_check krealloc(const void *, size_t, gfp_t);
 //resize existing allocation.
@@ -148,24 +148,26 @@ static struct kmem_cache *vm_area_cachep;
 
 vm_area_cachep = KMEM_CACHE(vm_area_struct, SLAB_PANIC|SLAB_ACCOUNT);
 /*
- KMEM_CACHE() is a macro defined in "/include/linux/slab.h" which actually expands to a call to
- kmem_cache_create() which is the procedure to register a new slab cache and adds the new cache
- to the list of all slabs in the system.
+ KMEM_CACHE() is a macro defined in "/include/linux/slab.h" which actually expands
+ to a call to kmem_cache_create() which is the procedure to register a new slab
+ cache and adds the new cache to the list of all slabs in the system.
  */
 
 struct vm_area_struct *vma = kmem_cache_alloc(vm_area_cachep, GFP_KERNEL);
 /*
- kmem_cache_alloc() is the procedure to allocate the object from the dedicated cache memory.
- The allocation will be attempted first on a partially filled slab,
- then (if no partially filled slabs are available) in a free slab, and if no free slabs are found,
+ kmem_cache_alloc() is the procedure to allocate the object from the dedicated
+ cache memory. The allocation will be attempted first on a partially filled slab,
+ then (if no partially filled slabs are available) in a free slab,
+ and if no free slabs are found,
  it will try to allocate new page frames from the underlying buddy allocator.
  */
 
  kmem_cache_free(vm_area_cachep, vma);
  /*
   kmem_cache_free() is the procedure that frees the memory allocated to the vma object
-  previously allocated. The (now free'd) slab will be kept in order to be used for future allocations
-  and the memory is not released immediately after this call. When all of the slabs have been free'd,
+  previously allocated. The (now free'd) slab,
+  will be kept in order to be used for future allocations and the memory is NOT
+  released immediately after this call. When all of the slabs have been free'd,
   kernel modules have to call kmem_cache_destroy() to release the pre allocated memory.
  */
 ```
@@ -338,9 +340,11 @@ At startup, the slab allocator does not have pages available quite yet. Through 
 ```c
 // "/mm/slab.c"
 
-static struct page *kmem_getpages(struct kmem_cache *cachep, gfp_t flags,int nodeid); // Asks the buddy allocator for pages for a particular kmem_cache.
+static struct page *kmem_getpages(struct kmem_cache *cachep, gfp_t flags,int nodeid);
+// Asks the buddy allocator for pages for a particular kmem_cache.
 
-static void kmem_freepages(struct kmem_cache *cachep, struct page *page); // frees the pages previously allocated linked to a specific kmem_cache.
+static void kmem_freepages(struct kmem_cache *cachep, struct page *page);
+// frees the pages previously allocated linked to a specific kmem_cache.
 
 ```
 
