@@ -11,7 +11,7 @@ If you have any further questions or suggestions after reading this writeup feel
 
 ## Introduction
 
-Seen as the Slab allocator is a fairly hard and advanced topic to grasp, I thought it would be nice for you to have a writeup of what has been covered in the lecture slides. I will briefly explain what the buddy allocator is in order to make it clear why a slab allocator is handy in the linux kernel and then continue with a more detailed explanation of the slab allocator(s). This writeup has been written based on the 5.3.13 Linux kernel (latest stable release at the time of writing --- _Fri 15 Nov 22:13:17 CET 2019_). I will illustrate what happens on x86-64 systems in which the page sizes are:
+Seen as the Slab allocator is a fairly hard and advanced topic to grasp but also essential to start progrmming in the Linux kernel, I wrote this document which explains how it works. I will briefly explain what the buddy allocator is in order to make it clear why a slab allocator is handy in the linux kernel and then continue with a more detailed explanation of the slab allocator(s). This writeup has been written based on the 5.3.13 Linux kernel (latest stable release at the time of writing --- _Fri 15 Nov 22:13:17 CET 2019_). I will illustrate what happens on x86-64 systems in which the page sizes are:
 
 * Normal Pages: 4KB (defined as the PAGE\_SIZE constant in the kernel).
 * Huge Pages: 2MB or 1GB.
