@@ -318,7 +318,7 @@ The objects in SLUB which make up a slab page are shown below:
 
 #### __SLOB slab management__
 
-Within a slob page, the SLOB allocator uses a few members from the strut page in order to manage object placement within a page:
+Within a slob page, the SLOB allocator uses a few members from the struct page in order to manage object placement within a page:
 
 * `void *freelist` : Points to the first free object in the page. From the first free object it is possible to traverse the other free objects in the same page.
 * `void *s_mem` : Points to the start of an object in the page frame.
