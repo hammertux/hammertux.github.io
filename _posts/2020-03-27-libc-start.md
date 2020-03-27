@@ -1,3 +1,7 @@
+---
+title: How glibc calls main()
+---
+
 (g)libc is the caller of main in C programs. If you're curious about what is happening, take a few minutes to read on and if you have gdb/objdump, you can follow along :)
 
 _Note: This is valid for Linux X86-64!_
