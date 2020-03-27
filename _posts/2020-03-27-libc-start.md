@@ -1,13 +1,11 @@
-After the lecture I got a few questions regarding how main is called and who is its caller.
-As Cristiano mentioned today, (g)libc is the caller of main in C programs. Even though this goes beyond the scope of the course and it's perfectly fine for you to ignore the rest of this message, if you're curious about what is happening, take a few minutes to read on and if you have gdb/objdump, you can follow along :)
+(g)libc is the caller of main in C programs. If you're curious about what is happening, take a few minutes to read on and if you have gdb/objdump, you can follow along :)
 
 _Note: This is valid for Linux X86-64!_
 
-**This is somewhat more advanced material than what we will be covering in the course, so if you have any questions please feel free to contact me (a.didio@student.vu.nl)**
 
 ## Starting simple
 
-If we take a simple C program such as the one shown in the lecture slides:
+If we take a simple C program: 
 
 ```C
 
@@ -115,7 +113,7 @@ This shows the stack frames that lead to the execution of main, which are indeed
 
 ## Conclusion
 
-Even though we have digged deeper, this is still not the whole picture. There is more to how program execution is setup but this is out of the scope of the course. Hopefully, this cleared up some doubts you might have had regarding today's lecture. 
+Even though we have digged deeper, this is still not the whole picture. There is more to how program execution is setup but this is out of the scope of this short post.
 
 
 
