@@ -15,8 +15,15 @@ Memory management in the Linux kernel is among the hardest topics which can be s
 
 ### Pages
 
-The most basic unit for memory management in Linux (and most other operating systems) is the **page** (physical page or page frame. Not to be confused with a virtual page.) which is 4KB (defined as the `PAGE_SIZE` macro in `<asm/page_types.h>`) for a _normal page_ and 2MB or 1GB for _huge pages_. The reason behind using the page as the standard unit is that the Memory Management Unit (_MMU_) which performs virtual to physical address translations via the page tables works at the page granularity. In Linux, each page is represented by the `struct page` (`<linux/mm_types.h>`), inarguable one of the most important structures used within the kernel. The page structure is 64B in size, which is ideal, allowing it to be cache-line aligned and contains all the information needed to represent and manipulate a page as I will discuss below. 
+The most basic unit for memory management in Linux (and most other operating systems) is the **page** (physical page or page frame. Not to be confused with a virtual page.) which is 4KB (defined as the `PAGE_SIZE` macro in `<asm/page_types.h>`) for a _normal page_ and 2MB or 1GB for _huge pages_. The reason behind using the page as the standard unit is that the Memory Management Unit (_MMU_) which performs virtual to physical address translations via the page tables works at the page granularity. In Linux, each page is represented by the `struct page` (`<linux/mm_types.h>`), inarguable one of the most important structures used within the kernel. The page structure is 64B in size, which is ideal, allowing it to be cache-line aligned and contains all the information needed to represent and manipulate a page as I will discuss below.
 
 * _For those of you who are interested in random fun statistics: given that the `struct page` is 64B and a standard page is 4KB, 64/4096 gives us 0.0156 ca., meaning that 1.56\% of all the DRAM available on a Linux system is taken up by page structures_.
+
+Below I will explain some of the most interesting members of the page structure. I will skip over those related to the slab allocator because there is a separate [dedicated post](https://hammertux.github.io/slab-allocator) that covers the internals of the slab and buddy allocators.
+
+| Member | Description |
+|:------:|-------------|
+| `unsigned long flags`{:.c} | bla |
+|  
 
 

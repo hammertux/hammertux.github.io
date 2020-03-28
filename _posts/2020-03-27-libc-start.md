@@ -6,12 +6,12 @@ title: How glibc calls main()
 
 _Note: This is valid for Linux X86-64!_
 
-
+`unsigned long test`{:.c}
 ## Starting simple
 
 If we take a simple C program: 
 
-```C
+```c
 
 #include <stdio.h>
 
@@ -63,7 +63,7 @@ If we disassemble our ELF binary with ```objdump -d test```, we see the followin
 
 If we take a look at __libc_start_main() function signature this gets more clear:
 
-```C
+```c
 
 int __libc_start_main(int *(main) (int, char * *, char * *),
 					  int argc,
