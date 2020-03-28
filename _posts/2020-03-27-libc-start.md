@@ -6,7 +6,6 @@ title: How glibc calls main()
 
 _Note: This is valid for Linux X86-64!_
 
-`unsigned long test`{:.c}
 ## Starting simple
 
 If we take a simple C program: 
