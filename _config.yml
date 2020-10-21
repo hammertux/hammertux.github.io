@@ -6,7 +6,7 @@ author:
   email: "andreadidio98@gmail.com"
 
 # Build settings
-baseurl: /hammertux.github.io/ # Change this to your relative path (ex: /blog/), or leave just a /
+baseurl: / # Change this to your relative path (ex: /blog/), or leave just a /
 markdown: kramdown
 source: .
 destination: ./_site
