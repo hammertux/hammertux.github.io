@@ -14,3 +14,7 @@ Hi! I am a PhD candidate in the [VUSec](https://www.vusec.net/) research group a
 * [Twitter](https://twitter.com/hammertux)
 * [LinkedIn](https://www.linkedin.com/in/andrea-di-dio-17b468131/)
 * [e-mail](mailto:a.di.dio@.vu.nl)
+
+## Publications
+
+* [Copy-on-Flip: Hardening ECC Memory Against Rowhammer Attacks.](https://download.vusec.net/papers/cof_ndss23.pdf) __Andrea Di Dio__, Koen Koning, Herbert Bos, Cristiano Giuffrida. In _NDSS_, February 2023. ([Code](https://github.com/vusec/Copy-on-Flip))
