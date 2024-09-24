@@ -103,3 +103,7 @@ bp <addr_main> #Set a breakpoint in the main function of the uspace_binary
 g # Resume execution
 ```
 
+## Conclusion
+
+In this short post we have explored the kernel routines which are involved in handling a system service on Windows 11 by reversing parts of the binary in order to uncover what happens when a userspace process issues such a system service.
+
